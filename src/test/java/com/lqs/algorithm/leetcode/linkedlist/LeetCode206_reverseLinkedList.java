@@ -1,7 +1,7 @@
 package com.lqs.algorithm.leetcode.linkedlist;
 
 import com.lqs.algorithm.datastructure.ListNode;
-import com.lqs.algorithm.datastructure.ListNodeUtil;
+import com.lqs.algorithm.utils.ListNodeUtil;
 /**
  * 翻转链表
  * create by lqs

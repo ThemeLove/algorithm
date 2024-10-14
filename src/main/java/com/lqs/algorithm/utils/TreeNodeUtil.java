@@ -1,4 +1,4 @@
-package com.lqs.algorithm.datastructure;
+package com.lqs.algorithm.utils;
 
 /**
  * create by lqs

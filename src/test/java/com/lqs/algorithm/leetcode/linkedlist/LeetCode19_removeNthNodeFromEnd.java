@@ -2,7 +2,7 @@ package com.lqs.algorithm.leetcode.linkedlist;
 
 
 import com.lqs.algorithm.datastructure.ListNode;
-import com.lqs.algorithm.datastructure.ListNodeUtil;
+import com.lqs.algorithm.utils.ListNodeUtil;
 
 /**
  * 删除链表中倒数第N个节点

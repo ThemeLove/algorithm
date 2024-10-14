@@ -1,7 +1,7 @@
 package com.lqs.algorithm.leetcode.linkedlist;
 
 import com.lqs.algorithm.datastructure.ListNode;
-import com.lqs.algorithm.datastructure.ListNodeUtil;
+import com.lqs.algorithm.utils.ListNodeUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,6 @@
-package com.lqs.algorithm.datastructure;
+package com.lqs.algorithm.utils;
+
+import com.lqs.algorithm.datastructure.ListNode;
 
 /**
  * create by lqs
