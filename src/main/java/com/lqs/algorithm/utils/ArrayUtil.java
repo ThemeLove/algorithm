@@ -24,7 +24,7 @@ public class ArrayUtil {
         System.out.println("]");
     }
 
-    public static void  printArr(int[] intArr) {
+    public static void printArr(int[] intArr) {
         if (intArr == null) {
             System.out.println("target arr is null.");
             return;
@@ -46,15 +46,40 @@ public class ArrayUtil {
         System.out.println("]");
     }
 
-    public static void printMetrix(int[][] metrix) {
-
-        int length = metrix.length;
-
-        for (int i = 0; i < length; i++) {
-
-            printArr(metrix[i]);
+    public static void printArr(char[] charArr) {
+        if (charArr == null) {
+            System.out.println("target arr is null.");
+            return;
+        }
+        if (charArr.length == 0) {
+            System.out.println("target arr is empty.");
+            return;
         }
 
+        System.out.print("target arr = [");
+
+        for (int i = 0; i < charArr.length; i++) {
+            if (i != charArr.length - 1) {
+                System.out.print(charArr[i] + ",");
+            } else {
+                System.out.print(charArr[i]);
+            }
+        }
+        System.out.println("]");
+    }
+
+    public static void printMetrix(int[][] metrix) {
+        int length = metrix.length;
+        for (int i = 0; i < length; i++) {
+            printArr(metrix[i]);
+        }
+    }
+
+    public static void printMetrix(char[][] metrix) {
+        int length = metrix.length;
+        for (int i = 0; i < length; i++) {
+            printArr(metrix[i]);
+        }
     }
 
 }
