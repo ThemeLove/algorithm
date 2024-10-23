@@ -68,6 +68,29 @@ public class ArrayUtil {
         System.out.println("]");
     }
 
+
+    public static void printArr(byte[] arr) {
+        if (arr == null) {
+            System.out.println("target arr is null.");
+            return;
+        }
+        if (arr.length == 0) {
+            System.out.println("target arr is empty.");
+            return;
+        }
+
+        System.out.print("target arr = [");
+
+        for (int i = 0; i < arr.length; i++) {
+            if (i != arr.length - 1) {
+                System.out.print(arr[i] + ",");
+            } else {
+                System.out.print(arr[i]);
+            }
+        }
+        System.out.println("]");
+    }
+
     public static void printMetrix(int[][] metrix) {
         int length = metrix.length;
         for (int i = 0; i < length; i++) {
