@@ -4,6 +4,8 @@ import com.lqs.algorithm.datastructure.TreeNode;
 import com.lqs.algorithm.utils.TreeNodeUtil;
 import org.junit.Test;
 
+import java.util.Stack;
+
 /**
  * create by lqs
  * date:2024-10-27
@@ -40,6 +42,37 @@ public class LeetCode538_convertBSTToGreaterTree {
         node.val += preSum;
         preSum = node.val;
         traversal(node.left);
+    }
+
+    @Test
+    public void solution2() {
+        // [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+        TreeNode root = TreeNodeUtil.createTree(4, 1, 6, 0, 2, 5, 7, null, null, null, 3, null, null, null, 8);
+        TreeNode ans = convertBST2(root);
+        System.out.println("ans -> " + ans);
+    }
+
+    /**
+     * 右中左 迭代法
+     * @param root
+     * @return
+     */
+    int preSum2 = 0;
+    public TreeNode convertBST2(TreeNode root) {
+        if (root == null) return null;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while(cur != null || !stack.isEmpty()){
+            while(cur != null) {
+                stack.push(cur);
+                cur = cur.right;
+            }
+            TreeNode node = stack.pop();
+            node.val = node.val + preSum2;
+            preSum2 = node.val;
+            cur = node.left;
+        }
+        return root;
     }
 
 }
