@@ -38,42 +38,55 @@ public class LeetCode53_maximumSubarray {
         System.out.println("ans -> " + ans);
     }
 
-    public int sum = 0;
     public int maxSubArray(int[] nums) {
-        backTracking(new ArrayList<>(), nums, 0);
-        return sum;
-    }
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
 
-
-    public void backTracking(List<Integer> path, int[] nums, int startIndex) {
-
-        Integer tempSum = path.stream().reduce(0, Integer::sum);
-        if (tempSum > sum) {
-            System.out.println(" got max sum path sum->" + tempSum);
-            System.out.println(" got max sum path ->" + path);
-            sum = tempSum;
+        for(int i = 1; i < nums.length; i++) {
+            dp[i] = Math.max(dp[i-1] + nums[i], nums[i]);
         }
 
-        // loop
-        for (int i = startIndex; i < nums.length; i++) {
-            path.add(nums[i]);
-            backTracking(path, nums, i+1);
-            path.removeLast();
+        int max = Integer.MIN_VALUE;
+
+        for(int sum: dp){
+            max = Math.max(sum, max);
         }
+        return max;
     }
+
+    @Test
+    public void test2() {
+        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
+
+        int ans = maxSubArray2(nums);
+
+        System.out.println("ans -> " + ans);
+    }
+
+    public int maxSubArray2(int[] nums) {
+        int p = nums[0];
+        int max = Integer.MIN_VALUE;
+        for(int i = 1; i < nums.length; i++) {
+            int q = Math.max(p + nums[i], nums[i]);
+            p = q;
+            max = Math.max(max, q);
+        }
+        return max;
+    }
+
 
 
     /**
      * 暴力解法(Brute force)
      */
     @Test
-    public void test2() {
+    public void test3() {
         int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
         int ans = maxSubArray2(nums);
         System.out.println("ans -> " + ans);
     }
 
-    public int maxSubArray2(int[] nums) {
+    public int maxSubArray3(int[] nums) {
         int sum = Integer.MIN_VALUE;
         int len = nums.length;
 
