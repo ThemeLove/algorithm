@@ -17,7 +17,7 @@ public class LeetCode1049_lastStoneWeightII {
     }
 
     /**
-     * 动态规划解法
+     * 动态规划解法：一维解法
      * 就是尽量把石头拆分成尽量相等的2部分，然后相撞，剩余的才最小.
      * 把所有石头总和/2,比如为target,然后转换为01背包问题，求dp[target]的最大值，然后根据最大值计算出剩余
      * @param nums
@@ -32,11 +32,11 @@ public class LeetCode1049_lastStoneWeightII {
         }
         int target = sum/2;
         int[] dp = new int[target+1];
+        // init, 可以省略
+        dp[0] = 0;
         for(int i = 0; i < nums.length; i++) {
-            for (int j = target; j >=0 ; j--) {
-                if (nums[i] <= j) {
-                    dp[j] = Math.max(dp[j], dp[j-nums[i]] + nums[i]);
-                }
+            for (int j = target; j >=nums[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j-nums[i]] + nums[i]);
             }
         }
         return sum - dp[target] - dp[target];

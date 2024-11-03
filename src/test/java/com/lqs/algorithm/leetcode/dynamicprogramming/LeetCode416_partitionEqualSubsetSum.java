@@ -3,7 +3,7 @@ package com.lqs.algorithm.leetcode.dynamicprogramming;
 import org.junit.Test;
 
 /**
- * LeetCode 416 割等和子集
+ * LeetCode 416 分割等和子集
  * create by lqs
  * date:2024-10-29
  */
@@ -11,9 +11,9 @@ public class LeetCode416_partitionEqualSubsetSum {
 
     @Test
     public void solution() {
-//        int[] nums = {1, 5, 11, 5}; // true {1, 5, 5} {11}
+        int[] nums = {1, 5, 11, 5}; // true {1, 5, 5} {11}
 //        int[] nums = {1, 2, 3, 5}; // false
-        int[] nums = {1, 2, 5}; // false
+//        int[] nums = {1, 2, 5}; // false
 
         boolean ans = canPartition(nums);
         System.out.println("ans -> " + ans);
@@ -34,18 +34,20 @@ public class LeetCode416_partitionEqualSubsetSum {
         }
         if (totalSum % 2 == 1) return false; // 奇数不满足条件
         int targetSum = totalSum / 2;
-        int[][] dp = new int[nums.length + 1][targetSum + 1];
+
+        int[][] dp = new int[nums.length][targetSum + 1];
+        // init
+        for (int j = nums[0]; j <=targetSum ; j++) {
+            dp[0][j] = nums[0];//元素的值既是重量又是价值
+        }
         // 省略初始化的过程，因为默认为0，初始化也是要初始化为0
-        for(int i = 1; i <= nums.length; i++) {
+        for(int i = 1; i < nums.length; i++) {//遍历物品
             // 赋值下一层
-            for(int j = 1; j <= targetSum; j++) {
+            for(int j = nums[i]; j <= targetSum; j++) {//遍历背包
                 // 状态转移方程
-                if (nums[i-1] > j) { // 判单当前物品是否大于背包容量
-                    dp[i][j] = dp[i-1][j];
-                } else {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j - nums[i-1]] + nums[i-1]);
-                }
+                dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j - nums[i]] + nums[i]);
             }
+            // 每一层结束都判断一下背包容量为target时，是否完全装满
             if (dp[i][targetSum] == targetSum) return true;
         }
         return false;
@@ -53,9 +55,9 @@ public class LeetCode416_partitionEqualSubsetSum {
 
     @Test
     public void solution2() {
-//        int[] nums = {1, 5, 11, 5}; // true {1, 5, 5} {11}
+        int[] nums = {1, 5, 11, 5}; // true {1, 5, 5} {11}
 //        int[] nums = {1, 2, 3, 5}; // false
-        int[] nums = {1, 2, 5}; // false
+//        int[] nums = {1, 2, 5}; // false
 
         boolean ans = canPartition2(nums);
         System.out.println("ans -> " + ans);
@@ -76,15 +78,14 @@ public class LeetCode416_partitionEqualSubsetSum {
         int targetSum = totalSum / 2;
 
         int[] dp = new int[targetSum + 1];
-        // 不同单独初始化dp数组，默认为0，初始化的值也为0
-        // 倒序遍历
-        for (int i = 0; i < nums.length; i++) {
-            for(int j = targetSum; j >= 0; j--) {
-                if (nums[i] <= j) { //只有放的下的时候才执行
-                    dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
-                }
+        // init 默认为0，初始化的值也为0
+        dp[0] = 0;
+        // 先遍历物品，再倒序遍历背包，顺序不可调整
+        for (int i = 0; i < nums.length; i++) {// 遍历物品
+            for(int j = targetSum; j >= nums[i]; j--) {// 遍历背包
+                dp[j] = Math.max(dp[j], dp[j - nums[i]] + nums[i]);
             }
-            // 每一层赋值完，判断最后一个元素是否满足要求
+            // 每一层结束都判断一下背包容量为target时，是否完全装满
             if (dp[targetSum] == targetSum) return true;
         }
         return false;
