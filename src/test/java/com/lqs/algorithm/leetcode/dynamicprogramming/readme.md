@@ -267,9 +267,47 @@
 ##### 1.纯多重背包问题
       KamaCode56:https://kamacoder.com/problempage.php?pid=1066
 ```shell
-    
-    
+        // 转化为01背包的问题
+        int total = 0;
+        for(int num: nums) {
+            total += num;
+        }
+
+        // 平铺重量
+        int[] allWeights = new int[total];
+        int weightInx = 0;
+        for(int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums[i]; j++) {
+                allWeights[weightInx] = weights[i];
+                weightInx++;
+            }
+        }
+
+        // 平铺价值
+        int[] allValues = new int[total];
+        int valueInx = 0;
+        for(int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums[i]; j++) {
+                allValues[valueInx] = values[i];
+                valueInx++;
+            }
+        }
+
+        // 01 背包解法
+        int[] dp = new int[bagSize+1];
+
+        // init
+
+        // loop
+        for (int i = 0; i < allWeights.length; i++) { // 先遍历物品
+            for (int j = bagSize; j >= allWeights[i]; j--) {// 再倒序遍历背包
+                dp[j] = Math.max(dp[j], dp[j-allWeights[i]] + allValues[i]);
+            }
+        }
+        return dp[bagSize];
 ```
+
+
 
 
 
