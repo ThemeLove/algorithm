@@ -8,7 +8,7 @@ import org.junit.Test;
  * create by lqs
  * date:2024-11-03
  */
-public class KamaCode46_01bag {
+public class KamaCode46_01Bag {
 
     @Test
     public void solution() {
